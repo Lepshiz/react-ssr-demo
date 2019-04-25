@@ -27,8 +27,8 @@ Tools like [create-react-app](https://github.com/facebook/create-react-app) have
   - Start the dev server at [http://localhost:3000](http://localhost:3000)
 - `npm test`
   - Start `jest` in watch mode
-  - `npm start:api`
-  - Start api server [http://localhost:4000](http://localhost:4000)
+- `npm start:api`
+- Start api server [http://localhost:4000](http://localhost:4000)
 
 ## Production
 
