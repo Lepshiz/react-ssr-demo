@@ -1,4 +1,4 @@
-# [https://github.com/cullenjett/react-ssr-boilerplate]react-ssr-boilerplate demo ⚛️
+# [https://github.com/cullenjett/react-ssr-boilerplate](react-ssr-boilerplate) demo ⚛️
 
 ## Initial setup
 
