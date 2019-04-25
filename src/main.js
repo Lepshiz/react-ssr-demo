@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import Loadable from 'react-loadable';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
-import App from './App';
-import configureStore from './utils/configureStore';
+import App from './router'
+import configureStore from './utils/configureStore'
 
-import './styles/index.scss';
+import './styles/index.scss'
 
-const store = configureStore(window.__INITIAL_STATE__);
+const store = configureStore(window.__INITIAL_STATE__)
 
 Loadable.preloadReady().then(() => {
   ReactDOM.hydrate(
@@ -18,6 +18,6 @@ Loadable.preloadReady().then(() => {
         <App />
       </BrowserRouter>
     </Provider>,
-    document.getElementById('root')
-  );
-});
+    document.getElementById('root'),
+  )
+})

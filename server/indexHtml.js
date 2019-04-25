@@ -1,60 +1,54 @@
-import { getAppEnv } from '../config/env';
+import { getAppEnv } from '../config/env'
 
-const env = getAppEnv();
-const { NODE_ENV, PUBLIC_URL = '' } = env.raw;
+const env = getAppEnv()
+const { NODE_ENV, PUBLIC_URL = '' } = env.raw
 
-let assetManifest;
+let assetManifest
 if (NODE_ENV === 'production') {
-  assetManifest = require('../build/asset-manifest.json');
+  assetManifest = require('../build/asset-manifest.json')
 } else {
   assetManifest = {
-    'main.js': '/main.bundle.js'
-  };
+    'main.js': '/main.bundle.js',
+  }
 }
 
-const preloadScripts = bundles => {
-  const mainJS = assetManifest['main.js'];
+const preloadScripts = (bundles) => {
+  const mainJS = assetManifest['main.js']
   const bundleFilePaths = bundles
-    .filter(bundle => bundle.file.match(/\.js$/))
-    .map(jsBundle => `${PUBLIC_URL}/${jsBundle.file}`);
+    .filter((bundle) => bundle.file.match(/\.js$/))
+    .map((jsBundle) => `${PUBLIC_URL}/${jsBundle.file}`)
 
   return [...bundleFilePaths, mainJS]
-    .map(
-      jsFilePath =>
-        `<link rel="preload" as="script" href="${jsFilePath}"></script>`
-    )
-    .join('');
-};
+    .map((jsFilePath) => `<link rel="preload" as="script" href="${jsFilePath}"></script>`)
+    .join('')
+}
 
 const cssLinks = () => {
   if (NODE_ENV !== 'production') {
-    return '';
+    return ''
   }
 
   return Object.keys(assetManifest)
-    .filter(file => file.match(/\.css$/))
-    .map(cssFile => assetManifest[cssFile])
-    .map(cssFilePath => `<link rel="stylesheet" href="${cssFilePath}">`)
-    .join('');
-};
+    .filter((file) => file.match(/\.css$/))
+    .map((cssFile) => assetManifest[cssFile])
+    .map((cssFilePath) => `<link rel="stylesheet" href="${cssFilePath}">`)
+    .join('')
+}
 
-const jsScripts = bundles => {
-  const mainJS = assetManifest['main.js'];
+const jsScripts = (bundles) => {
+  const mainJS = assetManifest['main.js']
   const bundleFilePaths = bundles
-    .filter(bundle => bundle.file.match(/\.js$/))
-    .map(jsBundle => `${PUBLIC_URL}/${jsBundle.file}`);
+    .filter((bundle) => bundle.file.match(/\.js$/))
+    .map((jsBundle) => `${PUBLIC_URL}/${jsBundle.file}`)
 
   return [...bundleFilePaths, mainJS]
-    .map(
-      jsFilePath =>
-        `<script type="text/javascript" src="${jsFilePath}"></script>`
-    )
-    .join('');
-};
+    .map((jsFilePath) => `<script type="text/javascript" src="${jsFilePath}"></script>`)
+    .join('')
+}
 
 export const indexHtml = ({ helmet, initialState, markup, bundles }) => {
-  const htmlAttrs = helmet.htmlAttributes.toString();
-  const bodyAttrs = helmet.bodyAttributes.toString();
+  const htmlAttrs = helmet.htmlAttributes.toString()
+  const bodyAttrs = helmet.bodyAttributes.toString()
 
   return `
     <!doctype html>
@@ -68,6 +62,7 @@ export const indexHtml = ({ helmet, initialState, markup, bundles }) => {
         ${helmet.style.toString()}
         ${helmet.script.toString()}
         ${helmet.noscript.toString()}
+        <style>html { background: #000000; }</style>
       </head>
       <body ${bodyAttrs}>
         <div id="root">${markup}</div>
@@ -81,5 +76,5 @@ export const indexHtml = ({ helmet, initialState, markup, bundles }) => {
         ${jsScripts(bundles)}
       </body>
     </html>
-  `;
-};
+  `
+}

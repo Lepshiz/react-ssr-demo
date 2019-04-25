@@ -1,23 +1,23 @@
 if (browserSupportsAllFeatures()) {
-  require('./main');
+  require('./main')
 } else {
-  loadScript(window.assetManifest['polyfills.js'], () => require('./main'));
+  loadScript(window.assetManifest['polyfills.js'], () => require('./main'))
 }
 
 function browserSupportsAllFeatures() {
-  return window.Promise && Object.assign;
+  return window.Promise && Object.assign
 }
 
 function loadScript(src, done) {
-  const script = document.createElement('script');
+  const script = document.createElement('script')
 
-  script.src = src;
+  script.src = src
   script.onload = () => {
-    done();
-  };
+    done()
+  }
   script.onerror = () => {
-    done(new Error('Failed to load script ' + src));
-  };
+    done(new Error('Failed to load script ' + src))
+  }
 
-  document.head.appendChild(script);
+  document.head.appendChild(script)
 }

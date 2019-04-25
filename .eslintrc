@@ -1,31 +1,57 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:import/errors",
-    "plugin:jsx-a11y/recommended",
-    "plugin:react/recommended"
-  ],
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 2015,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "plugins": ["react", "jsx-a11y", "import"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "prettier/react"],
   "env": {
-    "browser": true,
-    "node": true,
-    "es6": true,
-    "jest": true
+    "browser": true
   },
+  "plugins": ["prettier", "react"],
+  "parser": "babel-eslint",
   "rules": {
-    "no-console": 1
+    "prettier/prettier": "error",
+    "react/boolean-prop-naming": [1, { "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+" }],
+    "react/no-array-index-key": 2,
+    "no-console": 0,
+    "no-debugger": 1,
+    "react/no-access-state-in-setstate": 2,
+    "react/no-this-in-sfc": 2,
+    "react/no-children-prop": 0,
+    "react/no-deprecated": 1,
+    "react/no-did-mount-set-state": 2,
+    "react/no-direct-mutation-state": 2,
+    "react/no-multi-comp": 1,
+    "react/no-typos": 2,
+    "react/no-string-refs": 2,
+    "react/no-unescaped-entities": 1,
+    "react/no-unknown-property": 2,
+    "react/no-unused-prop-types": 1,
+    "react/no-unused-state": 1,
+    "react/prefer-es6-class": 2,
+    "react/prefer-stateless-function": [1, { "ignorePureComponents": true }],
+    "react/prop-types": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/require-optimization": 1,
+    "react/self-closing-comp": 1,
+    "react/style-prop-object": 2,
+    "react/jsx-boolean-value": 2,
+    "react/jsx-key": 2,
+    "no-unused-vars": 1,
+    "no-useless-escape": 0,
+    "jsx-a11y/alt-text": 0,
+    "jsx-a11y/href-no-hash": 0,
+    "no-mixed-operators": 0,
+    "semi": ["error", "never"],
+    "radix": 0,
+    "keyword-spacing": [2, { "before": true, "after": true }]
   },
   "settings": {
     "react": {
-      "version": "16"
+      "version": "16.4.1"
     }
+  },
+  "globals": {
+    "require": "readonly",
+    "Promise": "readonly",
+    "process": "readonly",
+    "__dirname": "readonly",
+    "module": "readonly"
   }
 }

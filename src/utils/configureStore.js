@@ -1,23 +1,26 @@
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk'
+import { createStore, compose, applyMiddleware } from 'redux'
 
-import rootReducer from '../reducers';
+import rootReducer from '../reducers'
 
 const configureStore = (initialState, options = { logger: true }) => {
-  const middleware = [thunk];
+  const middleware = [thunk]
 
-  if (process.env.NODE_ENV !== 'production' && options.logger) {
-    const { createLogger } = require('redux-logger');
-    const logger = createLogger({ collapsed: true });
-    middleware.push(logger);
+  let composeEnhancers = compose
+
+  if (process.env.NODE_ENT !== 'production' && typeof window !== 'undefined') {
+    if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
+      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    }
   }
 
-  const store = createStore(
-    rootReducer,
-    initialState,
-    applyMiddleware(...middleware)
-  );
-  return store;
-};
+  if (process.env.NODE_ENV !== 'production' && options.logger) {
+    const { createLogger } = require('redux-logger')
+    const logger = createLogger({ collapsed: true })
+    middleware.push(logger)
+  }
 
-export default configureStore;
+  return createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(...middleware)))
+}
+
+export default configureStore

@@ -1,0 +1,39 @@
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.event {
+  min-width: 100%;
+  flex-basis: 100%;
+  display: block;
+
+  @media (min-width: 768px) {
+    min-width: 50%;
+    flex-basis: 50%;
+  }
+
+  @media (min-width: 1024px) {
+    min-width: 33.333%;
+    flex-basis: 33.333%;
+  }
+}
+
+.link {
+  display: inline-block;
+  margin: 0 24px 24px 0;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #f1f1f1;
+  text-decoration: none;
+  box-shadow: 0 1px 0 0 rgba(darkorange, 0.75);
+  transition: color .25s;
+
+  &:visited {
+    color: rgba(#f1f1f1, 0.75);
+  }
+
+  &:hover {
+    color: darkorange;
+  }
+}
